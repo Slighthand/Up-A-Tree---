@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     private float moveForce = 10f;
 
     [SerializeField]
-    //private float jumpForce = 11f;
+    private float jumpForce = 11f;
 
     private float movementX;
     private float movementY;
@@ -38,6 +38,10 @@ public class Player : MonoBehaviour
     void Update()
     {
         PlayerMoveKeyboard();
+        if (Input.GetButtonDown("Jump"))
+            myBody.AddForce(new Vector2(myBody.velocity.x,jumpForce));
+            myBody.AddForce(new Vector2(myBody.velocity.y, jumpForce));
+
     }
 
     void PlayerMoveKeyboard()
@@ -61,6 +65,11 @@ public class Player : MonoBehaviour
         {
             anim.SetBool(WALK_ANIMATION, true);
             sr.flipX = true;
+        }
+        else if (movementY < 0)
+        {
+            anim.SetBool(WALK_ANIMATION, true);
+            sr.flipY = true;
         }
         else
         {
