@@ -12,7 +12,8 @@ public class Player : MonoBehaviour
 
     private float movementX;
     private float movementY;
-    
+
+
     private Rigidbody2D myBody;
 
     private SpriteRenderer sr;
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour
     {
         myBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        
 
         sr = GetComponent<SpriteRenderer>();
     }
@@ -31,16 +33,17 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         PlayerMoveKeyboard();
+        AnimatePlayer();
         if (Input.GetButtonDown("Jump"))
-            myBody.AddForce(new Vector2(myBody.velocity.x,jumpForce));
-            myBody.AddForce(new Vector2(myBody.velocity.y, jumpForce));
+            myBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
 
     }
 
@@ -49,31 +52,31 @@ public class Player : MonoBehaviour
         movementX = Input.GetAxisRaw("Horizontal");
         movementY = Input.GetAxisRaw("Vertical");
 
-        transform.position += new Vector3(movementX, 0f, 0f) * Time.deltaTime * moveForce;
-        transform.position += new Vector3(movementY, 0f, 0f) * Time.deltaTime * moveForce;
+        myBody.velocity = new Vector2(movementY * moveForce, movementX * moveForce);
+        //transform.position += new Vector3(movementX, 0f, 0f) * Time.deltaTime * moveForce;
+    
 
     }
 
     void AnimatePlayer()
     {
+        bool isMoving = (movementX != 0) || (movementY != 0);
+        anim.SetBool(WALK_ANIMATION, isMoving);
+
         if (movementX > 0)
-        {
-            anim.SetBool(WALK_ANIMATION, true);
             sr.flipX = false;
-        }
         else if (movementX < 0)
-        {
-            anim.SetBool(WALK_ANIMATION, true);
             sr.flipX = true;
-        }
-        else if (movementY > 0)
-        {
-            anim.SetBool(WALK_ANIMATION, true);
+
+      
+        if (movementY > 0)
+            sr.flipY = false;
+        else if (movementY < 0)
             sr.flipY = true;
-        }
-        else
-        {
-            anim.SetBool(WALK_ANIMATION, false);
-        }
     }
+
+
+
 }
+}
+ 
