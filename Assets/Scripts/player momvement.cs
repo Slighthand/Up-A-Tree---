@@ -65,6 +65,11 @@ public class Player : MonoBehaviour
             anim.SetBool(WALK_ANIMATION, true);
             sr.flipX = true;
         }
+        else if (movementY < 0)
+        {
+            anim.SetBool(WALK_ANIMATION, true);
+            sr.flipY = true;
+        }
         else
         {
             anim.SetBool(WALK_ANIMATION, false);
