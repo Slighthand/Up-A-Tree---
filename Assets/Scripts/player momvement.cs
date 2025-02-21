@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
     void Update()
     {
         PlayerMoveKeyboard();
+        if (Input.GetButtonDown("Jump"))
+            myBody.AddForce(new Vector2(myBody.velocity.x,jumpForce));
+
     }
 
     void PlayerMoveKeyboard()
