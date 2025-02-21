@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1890692224627238842}
   - component: {fileID: 2785680587534810861}
   - component: {fileID: 5173896802154066638}
-  - component: {fileID: 5181983691423585648}
   m_Layer: 0
   m_Name: squirrel_left
   m_TagString: Untagged
@@ -174,18 +173,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveForce: 10
   jumpForce: 11
---- !u!114 &5181983691423585648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3629824104497359070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a903172e21e8755458f0a4565d8d0b60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveForce: 10
-  jumpForce: 11
-  myBody: {fileID: 0}

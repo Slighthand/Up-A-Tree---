@@ -8,9 +8,10 @@ public class Player : MonoBehaviour
     private float moveForce = 10f;
 
     [SerializeField]
-    private float jumpForce = 11f;
+    //private float jumpForce = 11f;
 
     private float movementX;
+    private float movementY;
     
     private Rigidbody2D myBody;
 
@@ -42,8 +43,10 @@ public class Player : MonoBehaviour
     void PlayerMoveKeyboard()
     {
         movementX = Input.GetAxisRaw("Horizontal");
+        movementY = Input.GetAxisRaw("Vertical");
 
         transform.position += new Vector3(movementX, 0f, 0f) * Time.deltaTime * moveForce;
+        transform.position += new Vector3(movementY, 0f, 0f) * Time.deltaTime * moveForce;
 
     }
 
