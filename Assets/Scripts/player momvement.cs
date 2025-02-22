@@ -60,23 +60,35 @@ public class Player : MonoBehaviour
 
     void AnimatePlayer()
     {
-        bool isMoving = (movementX != 0) || (movementY != 0);
-        anim.SetBool(WALK_ANIMATION, isMoving);
 
         if (movementX > 0)
+        { anim.SetBool(WALK_ANIMATION, true);
             sr.flipX = false;
+        }
         else if (movementX < 0)
-            sr.flipX = true;
+        { sr.flipX = true;
+            anim.SetBool(WALK_ANIMATION, true);
+        }
 
-      
         if (movementY > 0)
+        {
             sr.flipY = false;
+            anim.SetBool(WALK_ANIMATION, true);
+        }
         else if (movementY < 0)
+        {
             sr.flipY = true;
+            anim.SetBool(WALK_ANIMATION, true);
+        }
+        else
+        {
+            anim.SetBool(WALK_ANIMATION, false);
+        }
+   
     }
 
 
 
 }
-}
+
  
