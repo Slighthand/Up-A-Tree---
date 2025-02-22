@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
         movementX = Input.GetAxisRaw("Horizontal");
         movementY = Input.GetAxisRaw("Vertical");
 
-        myBody.velocity = new Vector2(movementY * moveForce, movementX * moveForce);
+        myBody.velocity = new Vector2(movementX * moveForce, movementY * moveForce);
         //transform.position += new Vector3(movementX, 0f, 0f) * Time.deltaTime * moveForce;
     
 
