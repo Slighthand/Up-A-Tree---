@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,6 +32,7 @@ public class TreeObject : MonoBehaviour
     
     void SpawnBranch(float newBranchHeight)
     {
-        Instantiate(treeBranch, new Vector3(Random.Range(-6,6),newBranchHeight,0), Quaternion.identity);
+
+        Instantiate(treeBranch, new Vector3(UnityEngine.Random.Range(-6,6),newBranchHeight,0), Quaternion.identity);
     }
 }
