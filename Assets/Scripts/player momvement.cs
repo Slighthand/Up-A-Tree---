@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         myBody = GetComponent<Rigidbody2D>();
-        GetComponent<Rigidbody2D>().gravityScale = 30f;
+        GetComponent<Rigidbody2D>().gravityScale = 5f;
     }
 
     // Update is called once per frame
