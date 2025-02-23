@@ -7,7 +7,7 @@ public class TreeObject : MonoBehaviour
     public GameObject treeBranch;
     public Transform player;
     public Transform camera;
-    private float DistanceBetweenBranches = 2.5;
+    private float DistanceBetweenBranches = 2.5f;
     private float LastBranchY = 0;
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,7 @@ public class TreeObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player_max_height - LastBranchY > -6) {
+        if (player.position.y - LastBranchY > -6) {
             LastBranchY += DistanceBetweenBranches;
             SpawnBranch(LastBranchY);
         }
