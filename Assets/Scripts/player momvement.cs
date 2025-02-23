@@ -11,12 +11,16 @@ public class Player : MonoBehaviour
     private float jumpForce = 11f;
 
     private float movementX;
-    private float movementY;
+ 
 
 
     private Rigidbody2D myBody;
 
     private SpriteRenderer sr;
+    private bool isGrounded;
+    
+    public LayerMask groundLayer;
+    public Transform groundCheck;
 
     private Animator anim;
     private string WALK_ANIMATION = "walk";
@@ -25,7 +29,7 @@ public class Player : MonoBehaviour
     {
         myBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        
+
 
         sr = GetComponent<SpriteRenderer>();
     }
@@ -33,7 +37,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        myBody = GetComponent<Rigidbody2D>();
+        GetComponent<Rigidbody2D>().gravityScale = 30f;
     }
 
     // Update is called once per frame
@@ -41,22 +46,33 @@ public class Player : MonoBehaviour
     {
         PlayerMoveKeyboard();
         AnimatePlayer();
-        if (Input.GetButtonDown("Jump"))
-            myBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        //if (Input.GetButtonDown("Jump"))
+        //    myBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
 
 
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            Jump();
+        }
     }
 
     void PlayerMoveKeyboard()
     {
         movementX = Input.GetAxisRaw("Horizontal");
-        movementY = Input.GetAxisRaw("Vertical");
 
-        myBody.velocity = new Vector2(movementX * moveForce, movementY * moveForce);
+
+        myBody.velocity = new Vector2(movementX * moveForce, myBody.velocity.y);
         //transform.position += new Vector3(movementX, 0f, 0f) * Time.deltaTime * moveForce;
-    
+
 
     }
+    
+    void Jump()
+    {
+        myBody.velocity = new Vector2(myBody.velocity.x, jumpForce);
+}
 
     void AnimatePlayer()
     {
@@ -70,20 +86,20 @@ public class Player : MonoBehaviour
             anim.SetBool(WALK_ANIMATION, true);
         }
 
-        if (movementY > 0)
-        {
-            sr.flipY = false;
-            anim.SetBool(WALK_ANIMATION, true);
-        }
-        else if (movementY < 0)
-        {
-            sr.flipY = true;
-            anim.SetBool(WALK_ANIMATION, true);
-        }
-        else
-        {
-            anim.SetBool(WALK_ANIMATION, false);
-        }
+        //if (movementY > 0)
+        //{
+        //    sr.flipY = false;
+        //    anim.SetBool(WALK_ANIMATION, true);
+        //}
+        //else if (movementY < 0)
+        //{
+        //    sr.flipY = true;
+        //    anim.SetBool(WALK_ANIMATION, true);
+        //}
+        //else
+        //{
+        //    anim.SetBool(WALK_ANIMATION, false);
+        //}
    
     }
 
