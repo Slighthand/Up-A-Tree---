@@ -23,8 +23,8 @@ public class TreeObject : MonoBehaviour
     void Update()
     {
         if (player.position.y - LastBranchY > -6) {
-            LastBranchY += DistanceBetweenBranches;
             SpawnBranch(LastBranchY);
+            LastBranchY += DistanceBetweenBranches;
         }
         
         transform.position = new Vector3(0,camera.position.y,0);
