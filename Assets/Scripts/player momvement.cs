@@ -23,6 +23,10 @@ public class Player : MonoBehaviour
     public LayerMask Ground;
     public Transform groundCheck;
 
+    [SerializeField]
+    private AudioClip jumpSound;
+    private AudioSource audioSource;
+
     private Animator anim;
     private string WALK_ANIMATION = "walk";
 
@@ -37,6 +41,7 @@ public class Player : MonoBehaviour
         myBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -92,6 +97,12 @@ public class Player : MonoBehaviour
     void Jump()
     {
         myBody.velocity = new Vector2(myBody.velocity.x, jumpForce);
+        hasJumped = true;
+
+        if (jumpSound !=null && audioSource !=null)
+        {
+            audioSource.PlayOneShot(jumpSound);
+        }
     }
 
     void AnimatePlayer()
