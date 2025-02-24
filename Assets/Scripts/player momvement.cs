@@ -11,14 +11,14 @@ public class Player : MonoBehaviour
     private float jumpForce = 11f;
 
     private float movementX;
- 
+
 
 
     private Rigidbody2D myBody;
 
     private SpriteRenderer sr;
     private bool isGrounded;
-    
+
     public LayerMask Ground;
     public Transform groundCheck;
 
@@ -64,22 +64,22 @@ public class Player : MonoBehaviour
             Die();
         }
 
-    } 
+    }
 
     void PlayerMoveKeyboard()
     {
         movementX = Input.GetAxisRaw("Horizontal");
-// movementY = GetAxisRaw("Vertical");
+        // movementY = GetAxisRaw("Vertical");
 
         myBody.velocity = new Vector2(movementX * moveForce, myBody.velocity.y);
-      
+
 
     }
-    
+
     void Jump()
     {
         myBody.velocity = new Vector2(myBody.velocity.x, jumpForce);
-}
+    }
 
     void AnimatePlayer()
     {
@@ -92,31 +92,39 @@ public class Player : MonoBehaviour
         { sr.flipX = true;
             anim.SetBool(WALK_ANIMATION, true);
         }
-        void Die()
-        {
-            Debug.Log("Player has fallen off the ground");
-            gameObject.SetActive(false);
-        }
-
-        //if (movementY > 0)
-        //{
-        //    sr.flipY = false;
-        //    anim.SetBool(WALK_ANIMATION, true);
-        //}
-        //else if (movementY < 0)
-        //{
-        //    sr.flipY = true;
-        //    anim.SetBool(WALK_ANIMATION, true);
-        //}
-        //else
-        //{
-        //    anim.SetBool(WALK_ANIMATION, false);
-        //}
-
     }
 
+    void Die()
+    {
+        Debug.Log("Player has fallen off the ground");
+        gameObject.SetActive(false);
+    }
 
+    //if (movementY > 0)
+    //{
+    //    sr.flipY = false;
+    //    anim.SetBool(WALK_ANIMATION, true);
+    //}
+    //else if (movementY < 0)
+    //{
+    //    sr.flipY = true;
+    //    anim.SetBool(WALK_ANIMATION, true);
+    //}
+    //else
+    //{
+    //    anim.SetBool(WALK_ANIMATION, false);
+    //}
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Check if the player collides with the ground
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !isGrounded)
+        {
+            Die(); // Call Die method if colliding with ground
+        }
+    }
 }
+
+
 
  
