@@ -45,10 +45,17 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
+    void Die()
+        {
+            Debug.Log("Player has fallen off the ground");
+            gameObject.SetActive(false);
+        }
     void Update()
     {
         PlayerMoveKeyboard();
         AnimatePlayer();
+
+        
         //if (Input.GetButtonDown("Jump"))
         //    myBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
@@ -92,11 +99,11 @@ public class Player : MonoBehaviour
         { sr.flipX = true;
             anim.SetBool(WALK_ANIMATION, true);
         }
-        void Die()
-        {
-            Debug.Log("Player has fallen off the ground");
-            gameObject.SetActive(false);
-        }
+        // void Die()
+        // {
+        //     Debug.Log("Player has fallen off the ground");
+        //     gameObject.SetActive(false);
+        // }
 
         //if (movementY > 0)
         //{
