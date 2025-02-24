@@ -45,10 +45,17 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
+    void Die()
+        {
+            Debug.Log("Player has fallen off the ground");
+            gameObject.SetActive(false);
+        }
     void Update()
     {
         PlayerMoveKeyboard();
         AnimatePlayer();
+
+        
         //if (Input.GetButtonDown("Jump"))
         //    myBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
@@ -92,7 +99,19 @@ public class Player : MonoBehaviour
         { sr.flipX = true;
             anim.SetBool(WALK_ANIMATION, true);
         }
-    }
+
+
+         void Die()
+         {
+             Debug.Log("Player has fallen off the ground");
+             gameObject.SetActive(false);
+         }
+
+
+        else
+        {
+            anim.SetBool(WALK_ANIMATION, false);
+        }
 
     void Die()
     {
@@ -100,27 +119,12 @@ public class Player : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    //if (movementY > 0)
-    //{
-    //    sr.flipY = false;
-    //    anim.SetBool(WALK_ANIMATION, true);
-    //}
-    //else if (movementY < 0)
-    //{
-    //    sr.flipY = true;
-    //    anim.SetBool(WALK_ANIMATION, true);
-    //}
-    //else
-    //{
-    //    anim.SetBool(WALK_ANIMATION, false);
-    //}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Check if the player collides with the ground
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !isGrounded)
         {
-            Die(); // Call Die method if colliding with ground
+            Die(); 
         }
     }
 }

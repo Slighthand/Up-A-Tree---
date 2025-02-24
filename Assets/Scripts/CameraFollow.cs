@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform player;
+    private Transform player;
     private Vector3 tempPose;
     // Start is called before the first frame update
     void Start()
