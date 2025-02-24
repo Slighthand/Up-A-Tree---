@@ -45,18 +45,14 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Die()
-        {
-            Debug.Log("Player has fallen off the ground");
-            // gameObject.SetActive(false);
-            // Currently removed to prevent player from dying immediately upon entering game
-        }
+        // Currently removed to prevent player from dying immediately upon entering game
+   
     void Update()
     {
         PlayerMoveKeyboard();
         AnimatePlayer();
 
-        
+
         //if (Input.GetButtonDown("Jump"))
         //    myBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
@@ -100,27 +96,19 @@ public class Player : MonoBehaviour
         { sr.flipX = true;
             anim.SetBool(WALK_ANIMATION, true);
         }
-
-        //  Die() function already declared
-        //  void Die()
-        //  {
-        //      Debug.Log("Player has fallen off the ground");
-        //      gameObject.SetActive(false);
-        //  }
-
-
         else
         {
             anim.SetBool(WALK_ANIMATION, false);
         }
     }
 
-    // Die() function already declared
-    // void Die()
-    // {
-    //     Debug.Log("Player has fallen off the ground");
-    //     gameObject.SetActive(false);
-    // }
+   
+   
+    void Die()
+        {
+            Debug.Log("Player has fallen off the ground");
+            gameObject.SetActive(false);
+        }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
