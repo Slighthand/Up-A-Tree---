@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     private float jumpForce = 11f;
 
     private float movementX;
-    private int jumpCount = 0;
+    private bool hasJumped = false;
 
 
 
@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private float deathThreshold = -10f;
+    private GameObject currentGround;
 
     public AcornManager am;
 
@@ -35,8 +36,6 @@ public class Player : MonoBehaviour
     {
         myBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-
-
         sr = GetComponent<SpriteRenderer>();
     }
 
@@ -64,7 +63,13 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
-            jumpCount++;
+            hasJumped = true;
+        }
+
+        if (!isGrounded && hasJumped && currentGround != null)
+        {
+            Destroy(currentGround);
+            currentGround = null;
         }
 
         if (transform.position.y < deathThreshold)
@@ -118,19 +123,21 @@ public class Player : MonoBehaviour
   
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !isGrounded)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            if (jumpCount >= 0)
-            {
-                Die();
-            }
-            else
-            {
-                jumpCount = 0;
-            }
+            isGrounded = true;
+            hasJumped = false;
+            currentGround = collision.gameObject;
         }
     }
 
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            isGrounded = false;
+        }
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Acorn"))
