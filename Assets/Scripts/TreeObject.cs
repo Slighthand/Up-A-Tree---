@@ -9,7 +9,7 @@ public class TreeObject : MonoBehaviour
     public Transform player;
     public Transform camera;
     private float DistanceBetweenBranches = 2.5f;
-    private float LastBranchY = 0;
+    private float LastBranchY = 0.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +33,6 @@ public class TreeObject : MonoBehaviour
     void SpawnBranch(float newBranchHeight)
     {
 
-        Instantiate(treeBranch, new Vector3(UnityEngine.Random.Range(-6,6),newBranchHeight,0), Quaternion.identity);
+        Instantiate(treeBranch, new Vector3(UnityEngine.Random.Range(-5,5),newBranchHeight,0), Quaternion.identity);
     }
 }

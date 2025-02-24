@@ -48,7 +48,8 @@ public class Player : MonoBehaviour
     void Die()
         {
             Debug.Log("Player has fallen off the ground");
-            gameObject.SetActive(false);
+            // gameObject.SetActive(false);
+            // Currently removed to prevent player from dying immediately upon entering game
         }
     void Update()
     {
@@ -100,24 +101,26 @@ public class Player : MonoBehaviour
             anim.SetBool(WALK_ANIMATION, true);
         }
 
-
-         void Die()
-         {
-             Debug.Log("Player has fallen off the ground");
-             gameObject.SetActive(false);
-         }
+        //  Die() function already declared
+        //  void Die()
+        //  {
+        //      Debug.Log("Player has fallen off the ground");
+        //      gameObject.SetActive(false);
+        //  }
 
 
         else
         {
             anim.SetBool(WALK_ANIMATION, false);
         }
-
-    void Die()
-    {
-        Debug.Log("Player has fallen off the ground");
-        gameObject.SetActive(false);
     }
+
+    // Die() function already declared
+    // void Die()
+    // {
+    //     Debug.Log("Player has fallen off the ground");
+    //     gameObject.SetActive(false);
+    // }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
