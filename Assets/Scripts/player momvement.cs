@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float deathThreshold = -10f;
 
+    public AcornManager am;
+
     private void Awake()
     {
         myBody = GetComponent<Rigidbody2D>();
@@ -126,6 +128,15 @@ public class Player : MonoBehaviour
             {
                 jumpCount = 0;
             }
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Acorn"))
+        {
+            Destroy(other.gameObject);
+            am.acornCount++;
         }
     }
 }
