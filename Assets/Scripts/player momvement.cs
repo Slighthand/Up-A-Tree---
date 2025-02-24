@@ -25,6 +25,9 @@ public class Player : MonoBehaviour
     private Animator anim;
     private string WALK_ANIMATION = "walk";
 
+    [SerializeField]
+    private float deathThreshold = -10f;
+
     private void Awake()
     {
         myBody = GetComponent<Rigidbody2D>();
@@ -51,11 +54,16 @@ public class Player : MonoBehaviour
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, Ground);
 
-
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
         }
+
+        if (transform.position.y < deathThreshold)
+        {
+            Die();
+        }
+
     } 
 
     void PlayerMoveKeyboard()
@@ -65,7 +73,6 @@ public class Player : MonoBehaviour
 
         myBody.velocity = new Vector2(movementX * moveForce, myBody.velocity.y);
       
-
 
     }
     
@@ -85,6 +92,11 @@ public class Player : MonoBehaviour
         { sr.flipX = true;
             anim.SetBool(WALK_ANIMATION, true);
         }
+        void Die()
+        {
+            Debug.Log("Player has fallen off the ground");
+            gameObject.SetActive(false);
+        }
 
         //if (movementY > 0)
         //{
@@ -100,7 +112,7 @@ public class Player : MonoBehaviour
         //{
         //    anim.SetBool(WALK_ANIMATION, false);
         //}
-   
+
     }
 
 
