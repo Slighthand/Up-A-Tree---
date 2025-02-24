@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer sr;
     private bool isGrounded;
     
-    public LayerMask groundLayer;
+    public LayerMask Ground;
     public Transform groundCheck;
 
     private Animator anim;
@@ -49,10 +49,10 @@ public class Player : MonoBehaviour
         //if (Input.GetButtonDown("Jump"))
         //    myBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, Ground);
 
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump"))
         {
             Jump();
         }
@@ -61,10 +61,10 @@ public class Player : MonoBehaviour
     void PlayerMoveKeyboard()
     {
         movementX = Input.GetAxisRaw("Horizontal");
-
+// movementY = GetAxisRaw("Vertical");
 
         myBody.velocity = new Vector2(movementX * moveForce, myBody.velocity.y);
-        //transform.position += new Vector3(movementX, 0f, 0f) * Time.deltaTime * moveForce;
+      
 
 
     }
