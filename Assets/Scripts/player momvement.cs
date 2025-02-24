@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     private float jumpForce = 11f;
 
     private float movementX;
-    private bool hasJumped = false;
+    private int jumpCount = 0;
 
 
 
@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
-            hasJumped = true;
+            jumpCount++;
         }
 
         if (transform.position.y < deathThreshold)
@@ -118,13 +118,13 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !isGrounded)
         {
-            if (hasJumped && myBody.velocity.y < 0)
+            if (jumpCount >= 0)
             {
                 Die();
             }
             else
             {
-                hasJumped = false;
+                jumpCount = 0;
             }
         }
     }
