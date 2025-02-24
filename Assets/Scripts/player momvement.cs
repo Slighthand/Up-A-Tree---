@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
         {
             Jump();
         }
-    }
+    } 
 
     void PlayerMoveKeyboard()
     {
