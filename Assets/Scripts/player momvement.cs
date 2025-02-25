@@ -91,10 +91,10 @@ public class Player : MonoBehaviour
 
         if (movementX > 0)
         { anim.SetBool(WALK_ANIMATION, true);
-            sr.flipX = false;
+            sr.flipX = true;
         }
         else if (movementX < 0)
-        { sr.flipX = true;
+        { sr.flipX = false;
             anim.SetBool(WALK_ANIMATION, true);
         }
         else
