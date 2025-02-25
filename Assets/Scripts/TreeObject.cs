@@ -8,7 +8,7 @@ public class TreeObject : MonoBehaviour
     public GameObject treeBranch;
     public GameObject acorn;
     public Transform player;
-    public Transform camera;
+    public new Transform camera;
     private float DistanceBetweenBranches = 2.5f;
     private float LastBranchY = 0.0f;
     // Start is called before the first frame update
