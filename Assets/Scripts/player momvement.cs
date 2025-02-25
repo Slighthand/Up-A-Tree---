@@ -16,6 +16,10 @@ public class Player : MonoBehaviour
     public AcornManager am;
 
     private Rigidbody2D myBody;
+    private AudioSource audioSource;
+    
+    [SerializeField]
+    private AudioClip jumpSound;
 
     private SpriteRenderer sr;
     private bool isGrounded;
@@ -36,6 +40,8 @@ public class Player : MonoBehaviour
 
 
         sr = GetComponent<SpriteRenderer>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -84,6 +90,11 @@ public class Player : MonoBehaviour
     void Jump()
     {
         myBody.velocity = new Vector2(myBody.velocity.x, jumpForce);
+        
+        if (jumpSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(jumpSound);
+        }
     }
 
     void AnimatePlayer()
