@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class Player : MonoBehaviour
 
     private float movementX;
 
-
+    public AcornManager am;
 
     private Rigidbody2D myBody;
 
@@ -120,6 +121,11 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
+        if (other.gameObject.CompareTag("Acorn"))
+        {
+            Destroy(other.gameObject);
+            am.acornCount++;
+        }
         if (other.tag == "Death") 
         {
             SceneManager.LoadScene("RestartMenu");
