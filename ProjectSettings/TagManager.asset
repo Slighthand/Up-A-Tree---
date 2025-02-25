@@ -7,6 +7,7 @@ TagManager:
   - acorn
   - Acorn
   - Death
+  - TreeBranch
   layers:
   - Default
   - TransparentFX
