@@ -6,6 +6,7 @@ using UnityEngine;
 public class TreeObject : MonoBehaviour
 {
     public GameObject treeBranch;
+    public GameObject acorn;
     public Transform player;
     public Transform camera;
     private float DistanceBetweenBranches = 2.5f;
@@ -25,14 +26,23 @@ public class TreeObject : MonoBehaviour
         if (player.position.y - LastBranchY > -6) {
             SpawnBranch(LastBranchY);
             LastBranchY += DistanceBetweenBranches;
+            SpawnAcornAtRandom(LastBranchY);
+
         }
         
         transform.position = new Vector3(0,camera.position.y,0);
+        
+        
     }
     
     void SpawnBranch(float newBranchHeight)
     {
 
         Instantiate(treeBranch, new Vector3(UnityEngine.Random.Range(-5,5),newBranchHeight,0), Quaternion.identity);
+    }
+
+    void SpawnAcornAtRandom(float newAcornHeight)
+    {
+        Instantiate(acorn, new Vector3(UnityEngine.Random.Range(-5, 5), newAcornHeight, 0), Quaternion.identity);
     }
 }
