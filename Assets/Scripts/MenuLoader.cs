@@ -17,4 +17,10 @@ public class MenuLoader : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.tag == "Death") {
+            SceneManager.LoadScene("RestartMenu");
+        }
+    }
+
 }
