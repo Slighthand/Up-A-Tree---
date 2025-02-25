@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     private float jumpForce = 11f;
 
     private float movementX;
-    private bool hasJumped = false;
 
 
 
@@ -24,25 +23,19 @@ public class Player : MonoBehaviour
     public LayerMask Ground;
     public Transform groundCheck;
 
-    [SerializeField]
-    private AudioClip jumpSound;
-    private AudioSource audioSource;
-
     private Animator anim;
     private string WALK_ANIMATION = "walk";
 
     [SerializeField]
     private float deathThreshold = -10f;
-    private GameObject currentGround;
-
-    public AcornManager am;
 
     private void Awake()
     {
         myBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+
         sr = GetComponent<SpriteRenderer>();
-        audioSource = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -69,13 +62,6 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
-            hasJumped = true;
-        }
-
-        if (!isGrounded && hasJumped && currentGround != null)
-        {
-            Destroy(currentGround);
-            currentGround = null;
         }
 
         if (transform.position.y < deathThreshold)
@@ -98,12 +84,6 @@ public class Player : MonoBehaviour
     void Jump()
     {
         myBody.velocity = new Vector2(myBody.velocity.x, jumpForce);
-        hasJumped = true;
-
-        if (jumpSound !=null && audioSource !=null)
-        {
-            audioSource.PlayOneShot(jumpSound);
-        }
     }
 
     void AnimatePlayer()
@@ -128,36 +108,25 @@ public class Player : MonoBehaviour
     void Die()
         {
             Debug.Log("Player has fallen off the ground");
-            gameObject.SetActive(false);
+            // gameObject.SetActive(false);
         }
 
-
-  
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !isGrounded)
         {
-            isGrounded = true;
-            hasJumped = false;
-            currentGround = collision.gameObject;
+            Die(); 
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other) 
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        if (other.tag == "Death") 
         {
-            isGrounded = false;
+            SceneManager.LoadScene("RestartMenu");
         }
     }
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Acorn"))
-        {
-            Destroy(other.gameObject);
-            am.acornCount++;
-        }
-    }
+
 }
 
 
