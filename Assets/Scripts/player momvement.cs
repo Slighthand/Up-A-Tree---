@@ -16,12 +16,19 @@ public class Player : MonoBehaviour
     public AcornManager am;
 
     private Rigidbody2D myBody;
+    private AudioSource audioSource;
+    
+    [SerializeField]
+    private AudioClip jumpSound;
 
     private SpriteRenderer sr;
     private bool isGrounded;
 
     public LayerMask Ground;
     public Transform groundCheck;
+
+    private bool hasJumped = false;
+    private GameObject currentGround;
 
     private Animator anim;
     private string WALK_ANIMATION = "walk";
@@ -36,6 +43,8 @@ public class Player : MonoBehaviour
 
 
         sr = GetComponent<SpriteRenderer>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -62,6 +71,13 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
+            hasJumped = true;
+        }
+
+        if (!isGrounded && hasJumped && currentGround != null)
+        {
+            Destroy(currentGround); // FIXED: Now works because it's a global variable!
+            currentGround = null; // Reset so it doesn't try to destroy again
         }
 
         if (transform.position.y < deathThreshold)
@@ -84,6 +100,11 @@ public class Player : MonoBehaviour
     void Jump()
     {
         myBody.velocity = new Vector2(myBody.velocity.x, jumpForce);
+        
+        if (jumpSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(jumpSound);
+        }
     }
 
     void AnimatePlayer()
@@ -108,18 +129,29 @@ public class Player : MonoBehaviour
     void Die()
         {
             Debug.Log("Player has fallen off the ground");
-            // gameObject.SetActive(false);
-        }
+            gameObject.SetActive(false);
+        // gameObject.SetActive(false);
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !isGrounded)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            Die(); 
+            isGrounded = true;
+            hasJumped = false;
+            currentGround = collision.gameObject; // FIXED: Now properly stores the ground!
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other) 
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            isGrounded = false;
+        }
+    }
+
+        void OnTriggerEnter2D(Collider2D other) 
     {
         if (other.gameObject.CompareTag("Acorn"))
         {
