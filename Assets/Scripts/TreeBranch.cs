@@ -14,8 +14,9 @@ public class TreeBranch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.transform.position.y - transform.position.y > 10) {
-            Destroy(this.gameObject);
-        }
+        // if (player.transform.position.y - transform.position.y > 10) {
+        //     Destroy(this.gameObject);
+        // }
     }
+    
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3454878345949860700}
   - component: {fileID: 7744974706556927557}
   - component: {fileID: 7260611090594483899}
-  - component: {fileID: 8100632863217630025}
+  - component: {fileID: 8681798861331400603}
   m_Layer: 0
   m_Name: Branch
   m_TagString: Untagged
@@ -174,12 +174,12 @@ PlatformEffector2D:
     m_Bits: 4294967295
   m_RotationalOffset: 0
   m_UseOneWay: 1
-  m_UseOneWayGrouping: 0
+  m_UseOneWayGrouping: 1
   m_SurfaceArc: 180
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
---- !u!66 &8100632863217630025
+--- !u!66 &8681798861331400603
 CompositeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
