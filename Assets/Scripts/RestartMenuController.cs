@@ -3,18 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MenuLoader : MonoBehaviour
+public class RestartMenuController : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
-    {
-        
+    public void SceneChanger(string RestartMenu) {
+        SceneManager.LoadScene(RestartMenu);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 }
