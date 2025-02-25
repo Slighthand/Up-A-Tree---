@@ -7,6 +7,7 @@ public class RestartMenuController : MonoBehaviour
 {
     // Start is called before the first frame update
     public void SceneChanger(string RestartMenu) {
+        Debug.Log("Died.");
         SceneManager.LoadScene(RestartMenu);
     }
 }
